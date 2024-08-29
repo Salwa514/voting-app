@@ -26,7 +26,7 @@
             width: 300px;
         }
         .emoji {
-            font-size: 150px; /* Increase the size of the emojis */
+            font-size: 150px; /* Larger emoji size */
             margin: 20px;
             cursor: pointer;
         }
@@ -37,7 +37,7 @@
         .thank-you {
             font-size: 24px;
             margin-top: 20px;
-            display: none; /* Hide the thank you note initially */
+            display: none; /* Initially hidden */
         }
     </style>
 </head>
@@ -56,17 +56,20 @@
         <div class="thank-you" id="thank-you">Thank you for your feedback!</div>
     </div>
     <script>
+        // Initialize ratings for each emoji
         let smileyRating = 0;
         let sadRating = 0;
 
+        // Function to handle rating
         function rate(emotion) {
             if (emotion === 'smiley') {
-                smileyRating += 1;
+                smileyRating += 1; // Increase smiley rating
                 document.getElementById('smiley-rating').innerText = `Smiley Rating: ${smileyRating}`;
             } else if (emotion === 'sad') {
-                sadRating += 1;
+                sadRating += 1; // Increase sad rating
                 document.getElementById('sad-rating').innerText = `Sad Rating: ${sadRating}`;
             }
+            // Show thank you note
             document.getElementById('thank-you').style.display = 'block';
         }
     </script>
