@@ -41,6 +41,10 @@
             font-size: 50px;
             cursor: pointer;
         }
+        .rating-summary {
+            font-size: 24px;
+            margin-top: 20px;
+        }
         .thank-you {
             font-size: 24px;
             margin-top: 20px;
@@ -104,15 +108,38 @@
             </div>
         </div>
 
+        <!-- Rating Summary -->
+        <div class="rating-summary">
+            <div>Total Happy: <span id="total-happy">0</span></div>
+            <div>Total Neutral: <span id="total-neutral">0</span></div>
+            <div>Total Sad: <span id="total-sad">0</span></div>
+        </div>
+
+        <!-- Thank You Message -->
         <div class="thank-you" id="thank-you">Thank you for your feedback!</div>
     </div>
 
     <script>
+        // Initialize total ratings
+        let totalHappy = 0;
+        let totalNeutral = 0;
+        let totalSad = 0;
+
         // Function to handle rating
         function rate(question, emotion) {
+            if (emotion === 'happy') {
+                totalHappy += 1;
+                document.getElementById('total-happy').innerText = totalHappy;
+            } else if (emotion === 'neutral') {
+                totalNeutral += 1;
+                document.getElementById('total-neutral').innerText = totalNeutral;
+            } else if (emotion === 'sad') {
+                totalSad += 1;
+                document.getElementById('total-sad').innerText = totalSad;
+            }
+
             // Show thank you note
             document.getElementById('thank-you').style.display = 'block';
-            console.log(`Rated ${emotion} for ${question}`);
         }
     </script>
 </body>
