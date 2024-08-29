@@ -26,6 +26,11 @@
             box-sizing: border-box;
             text-align: center;
         }
+        .logo {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
         .question-container {
             display: none; /* Hide all pages initially */
         }
@@ -64,6 +69,7 @@
             font-size: 16px;
             margin-top: 20px;
             text-align: left;
+            display: none; /* Initially hidden */
         }
         .thank-you {
             font-size: 18px;
@@ -74,6 +80,9 @@
 </head>
 <body>
     <div class="container">
+        <!-- Logo -->
+        <img src="logo-url-here" alt="Espresso Lab Logo" class="logo">
+
         <!-- Page 1: General Experience -->
         <div id="page-1" class="question-container">
             <div class="question">1. How would you rate your overall experience at Espresso Lab?</div>
@@ -121,7 +130,7 @@
             <button class="button" id="submit-button" onclick="submitSurvey()">Submit</button>
         </div>
 
-        <!-- Rating Summary -->
+        <!-- Rating Summary and Thank You Message -->
         <div class="rating-summary" id="rating-summary">
             <div>Total Happy: <span id="total-happy">0</span></div>
             <div>Total Neutral: <span id="total-neutral">0</span></div>
@@ -129,12 +138,11 @@
             <div>Total Responses: <span id="total-responses">0</span></div>
         </div>
 
-        <!-- Thank You Message -->
         <div class="thank-you" id="thank-you">Thank you for your feedback!</div>
     </div>
 
     <script>
-        // Initialize total ratings
+        // Initialize ratings for each emoji
         let totalHappy = 0;
         let totalNeutral = 0;
         let totalSad = 0;
@@ -149,11 +157,11 @@
         // Handle rating
         function rate(emotion) {
             if (emotion === 'happy') {
-                totalHappy += 1;
+                totalHappy += 1; // Increase happy rating
             } else if (emotion === 'neutral') {
-                totalNeutral += 1;
+                totalNeutral += 1; // Increase neutral rating
             } else if (emotion === 'sad') {
-                totalSad += 1;
+                totalSad += 1; // Increase sad rating
             }
         }
 
