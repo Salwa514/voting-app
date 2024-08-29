@@ -37,6 +37,7 @@
         .question {
             font-size: 18px;
             margin-bottom: 20px;
+            word-wrap: break-word;
             text-align: left;
         }
         .emoji-container {
@@ -61,8 +62,16 @@
             margin: 10px;
             cursor: pointer;
         }
-        .rating-summary, .thank-you {
+        .button.hidden {
+            display: none;
+        }
+        .rating-summary {
             font-size: 16px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .thank-you {
+            font-size: 18px;
             margin-top: 20px;
             display: none;
         }
@@ -71,7 +80,7 @@
 <body>
     <div class="container">
         <!-- Logo -->
-        <img src="https://www.yourwebsite.com/images/logo.png" alt="Espresso Lab Logo" class="logo">
+        <img src="https://1drv.ms/i/s!AhWSXf_0jOEekh0WA6MLFfjDNHHV?e=Bb1wCY" alt="Espresso Lab Logo" class="logo">
 
         <!-- Page 1: General Experience -->
         <div id="page-1" class="question-container">
@@ -184,21 +193,7 @@
 
             // Redirect to the first question after a delay
             setTimeout(() => {
-                // Reset ratings (optional)
-                totalHappy = 0;
-                totalNeutral = 0;
-                totalSad = 0;
-
-                // Show the first page again
                 showPage(1);
                 document.getElementById('rating-summary').style.display = 'none';
                 document.getElementById('thank-you').style.display = 'none';
-                document.getElementById('submit-button').style.display = 'block';
-            }, 3000); // 3-second delay
-        }
-
-        // Initial call to show the first page
-        showPage(1);
-    </script>
-</body>
-</html>
+                document
