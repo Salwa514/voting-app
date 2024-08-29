@@ -18,29 +18,36 @@
         }
         .container {
             width: 100%;
-            max-width: 380px;
+            max-width: 500px;
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             box-sizing: border-box;
+            text-align: center;
         }
-        .question-container {
+        .logo {
+            max-width: 100%;
+            height: auto;
             margin-bottom: 20px;
         }
+        .question-container {
+            display: none; /* Hide all pages initially */
+        }
         .question {
-            font-size: 16px;
-            margin-bottom: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
             word-wrap: break-word;
             text-align: left;
         }
         .emoji-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             width: 100%;
+            margin-bottom: 20px;
         }
         .emoji {
-            font-size: 30px;
+            font-size: 50px;
             cursor: pointer;
             flex: 1;
             padding: 10px;
@@ -48,6 +55,15 @@
         }
         .emoji:hover {
             transform: scale(1.2);
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .button.hidden {
+            display: none;
         }
         .rating-summary {
             font-size: 16px;
@@ -63,46 +79,58 @@
 </head>
 <body>
     <div class="container">
-        <!-- General Experience Questions -->
-        <div class="question-container">
+        <!-- Logo -->
+        <img src="logo-url-here" alt="Espresso Lab Logo" class="logo">
+
+        <!-- Page 1: General Experience -->
+        <div id="page-1" class="question-container">
             <div class="question">1. How would you rate your overall experience at Espresso Lab?</div>
             <div class="emoji-container">
                 <div class="emoji" onclick="rate('happy')">😊</div>
                 <div class="emoji" onclick="rate('neutral')">😐</div>
                 <div class="emoji" onclick="rate('sad')">😞</div>
             </div>
+            <button class="button" onclick="nextPage(1)">Next</button>
         </div>
 
-        <!-- Drinks and Food Questions -->
-        <div class="question-container">
+        <!-- Page 2: Drinks -->
+        <div id="page-2" class="question-container">
             <div class="question">2. How satisfied are you with the quality of our drinks?</div>
             <div class="emoji-container">
                 <div class="emoji" onclick="rate('happy')">😊</div>
                 <div class="emoji" onclick="rate('neutral')">😐</div>
                 <div class="emoji" onclick="rate('sad')">😞</div>
             </div>
+            <button class="button" onclick="prevPage(2)">Previous</button>
+            <button class="button" onclick="nextPage(2)">Next</button>
         </div>
-        <div class="question-container">
+
+        <!-- Page 3: Food -->
+        <div id="page-3" class="question-container">
             <div class="question">3. How satisfied are you with the quality of our food?</div>
             <div class="emoji-container">
                 <div class="emoji" onclick="rate('happy')">😊</div>
                 <div class="emoji" onclick="rate('neutral')">😐</div>
                 <div class="emoji" onclick="rate('sad')">😞</div>
             </div>
+            <button class="button" onclick="prevPage(3)">Previous</button>
+            <button class="button" onclick="nextPage(3)">Next</button>
         </div>
 
-        <!-- Atmosphere Questions -->
-        <div class="question-container">
+        <!-- Page 4: Atmosphere -->
+        <div id="page-4" class="question-container">
             <div class="question">4. How would you rate the atmosphere of Espresso Lab? (e.g., decor, lighting, and music)</div>
             <div class="emoji-container">
                 <div class="emoji" onclick="rate('happy')">😊</div>
                 <div class="emoji" onclick="rate('neutral')">😐</div>
                 <div class="emoji" onclick="rate('sad')">😞</div>
             </div>
+            <button class="button" onclick="prevPage(4)">Previous</button>
+            <button class="button" id="submit-button" onclick="showSummary()">Submit</button>
         </div>
 
         <!-- Rating Summary -->
-        <div class="rating-summary">
+        <div class="rating-summary" id="rating-summary">
             <div>Total Happy: <span id="total-happy">0</span></div>
             <div>Total Neutral: <span id="total-neutral">0</span></div>
             <div>Total Sad: <span id="total-sad">0</span></div>
@@ -118,22 +146,42 @@
         let totalNeutral = 0;
         let totalSad = 0;
 
-        // Function to handle rating
+        // Show the first page
+        function showPage(pageNumber) {
+            document.querySelectorAll('.question-container').forEach(page => page.style.display = 'none');
+            document.getElementById(`page-${pageNumber}`).style.display = 'block';
+        }
+
+        // Handle rating
         function rate(emotion) {
             if (emotion === 'happy') {
                 totalHappy += 1;
-                document.getElementById('total-happy').innerText = totalHappy;
             } else if (emotion === 'neutral') {
                 totalNeutral += 1;
-                document.getElementById('total-neutral').innerText = totalNeutral;
             } else if (emotion === 'sad') {
                 totalSad += 1;
-                document.getElementById('total-sad').innerText = totalSad;
             }
-
-            // Show thank you note
-            document.getElementById('thank-you').style.display = 'block';
         }
+
+        // Navigate to the next page
+        function nextPage(currentPage) {
+            showPage(currentPage + 1);
+        }
+
+        // Navigate to the previous page
+        function prevPage(currentPage) {
+            showPage(currentPage - 1);
+        }
+
+        // Show rating summary and thank you message
+        function showSummary() {
+            document.getElementById('rating-summary').style.display = 'block';
+            document.getElementById('thank-you').style.display = 'block';
+            document.getElementById('submit-button').style.display = 'none';
+        }
+
+        // Initial call to show the first page
+        showPage(1);
     </script>
 </body>
 </html>
